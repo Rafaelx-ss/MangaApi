@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MangaApi", "MangaApi.csproj", "{1D95F37B-DF20-4271-84F7-7D26578F11CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D95F37B-DF20-4271-84F7-7D26578F11CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D95F37B-DF20-4271-84F7-7D26578F11CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D95F37B-DF20-4271-84F7-7D26578F11CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D95F37B-DF20-4271-84F7-7D26578F11CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {615AE683-B9D4-466B-9FAA-42474267880F}
+	EndGlobalSection
+EndGlobal
