@@ -1,9 +1,12 @@
 using MangaApi.Models;
 using MangaApi.Services;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<MangaService>();
+builder.Services.AddScoped<MangaRepository>();
+
+builder.Services.AddScoped<MangaService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -18,16 +21,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var mangaService = app.Services.GetRequiredService<MangaService>();
-
-app.MapGet("/mangas", () =>
+app.MapGet("/mangas", (MangaService mangaService) =>
 {
     return Results.Ok(mangaService.GetAll());
 })
 .WithName("GetAllMangas")
 .WithOpenApi();
 
-app.MapGet("/mangas/{id}", (int id) =>
+app.MapGet("/mangas/{id}", (int id, MangaService mangaService) =>
 {
     var manga = mangaService.GetById(id);
     return manga is not null ? Results.Ok(manga) : Results.NotFound();
@@ -35,7 +36,7 @@ app.MapGet("/mangas/{id}", (int id) =>
 .WithName("GetMangaById")
 .WithOpenApi();
 
-app.MapPost("/mangas", (Manga manga) =>
+app.MapPost("/mangas", (Manga manga, MangaService mangaService) =>
 {
     mangaService.Add(manga);
     return Results.Created($"/mangas/{manga.Id}", manga);
@@ -43,7 +44,7 @@ app.MapPost("/mangas", (Manga manga) =>
 .WithName("AddManga")
 .WithOpenApi();
 
-app.MapPut("/mangas/{id}", (int id, Manga updatedManga) =>
+app.MapPut("/mangas/{id}", (int id, Manga updatedManga, MangaService mangaService) =>
 {
     var success = mangaService.Update(id, updatedManga);
     return success ? Results.NoContent() : Results.NotFound();
@@ -51,7 +52,7 @@ app.MapPut("/mangas/{id}", (int id, Manga updatedManga) =>
 .WithName("UpdateManga")
 .WithOpenApi();
 
-app.MapDelete("/mangas/{id}", (int id) =>
+app.MapDelete("/mangas/{id}", (int id, MangaService mangaService) =>
 {
     var success = mangaService.Delete(id);
     return success ? Results.NoContent() : Results.NotFound();
